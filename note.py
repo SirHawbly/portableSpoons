@@ -26,6 +26,32 @@ a440 = 440
 # ------------------------------------------------------------------------------
 
 
+## defines the variable that will define the notes in a chord
+noteType = {
+  'note'     : 1, ## most likely for bass?
+  'interval' : 2, ## most likely for drums?
+  'small'    : 3, ## most likely for lead instruments?
+  'medium'   : 4, ## lead?
+  'large'    : 5, ## lead?
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+## defines the variable that will talk about how a 
+## chord is composed, TODO
+intervalType = {
+  'minor'      : 0, ## these will have impact on how dissonant a 
+  'major'      : 0, ## song is, with the more dissonant it becomes,
+  'augmented'  : 0, ## the more probable the consonance upcoming.
+  'diminished' : 0, ## 
+}
+
+
+# ------------------------------------------------------------------------------
+
+
 ## derived from 
 ##   https://en.wikipedia.org/wiki/Consonance_and_dissonance#Consonance
 
