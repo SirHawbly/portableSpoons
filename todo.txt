@@ -14,6 +14,8 @@
 # ------------------------------------------------------------------------------
 
 
+. check into barts apply license stuff in his github.
+. paste the licensing into all files im going to use.
 . Check out Markov Chains, and Implement them.
 . Look into chord composition.
 
