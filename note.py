@@ -1,37 +1,70 @@
 
+import copy
+
+
+VERBOSE = True 
+
+# ------------------------------------------------------------------------------
+
+# defines the base printing function for this file,
+# if the VERBOSE variable is true, it will print things 
+# through out the file
+def vprint(string):
+  if VERBOSE :
+    print (string)
+
+# ------------------------------------------------------------------------------
+
+# defines the function that is used to populate the list 
+# of all possible notes, and their definitions.  This includes 
+# their fourths, fifths, etc.
+def getNotes():
+  
+  possNotes = []
+  tempNote = None
+
+  vprint("getting all possible notes.")
+
+  for note in ('A', 'B', 'C', 'D', 'E', 'F', 'G'):
+
+    ## add and print the note
+    possNotes += [note]
+    vprint (str('adding') + note)
+
+    ## the notes that dont have sharps are b, and e.
+    if (not (note == 'B' or note == 'E')):
+      tempNote = note + '#'
+      possNotes += [tempNote]
+      vprint(str('adding') + tempNote)
+
+  ## pNotes now stores a list of all possible note names
+
+  allNotes = []
+
+  return possNotes
+
+# ------------------------------------------------------------------------------
 
 chain = ""
+
 newLink  = ""
 
 tempNote = None
-possibleNotes = []
 
-for note in ('A', 'B', 'C', 'D', 'E', 'F', 'G'):
+possibleNotes = getNotes()
 
-  ## the notes that dont have flats are c, and f.
-  # if (not (note == "C" or note == "F")):
-    # tempNote = note + str("b")
-    # print(tempNote)
-
-  ## add and print the note
-  possibleNotes += [note]
-  print (note)
-
-  ## the notes that dont have sharps are b, and e.
-  if (not (note == 'B' or note == 'E')):
-    tempNote = note + '#'
-    possibleNotes += [tempNote]
-    print(tempNote)
+vprint(possibleNotes)
 
 
-print(possibleNotes)
-
-
-
-data = {
-   'name' : 'ACME',
-   'shares' : 100,
-   'price' : 542.23
+musicNote = {
+   'name' : 'unInit',
+   'fourths' : [],
+   'fifths' : [],
+   'octaves' : [],
+   'minorThird' : [],
+   'majorThird' : [],
 }
 
-print data['name']
+vprint(musicNote["name"])
+
+
