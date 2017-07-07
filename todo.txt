@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------------------
+# Done
+# ------------------------------------------------------------------------------
+
+
+. Make a verbose print function.
+. Make a list of ALL available notes.
+. Create a list of all transitions for a note.
+. make sublists for consonance/dissonance.
+
+
+# ------------------------------------------------------------------------------
+# Doin
+# ------------------------------------------------------------------------------
+
+
+. Check out Markov Chains, and Implement them.
+. Look into chord composition.
+
+
+# ------------------------------------------------------------------------------
+# Todo 
+# ------------------------------------------------------------------------------
+
+
+. Check out how to make Chords.
+. Look at making multiple instruments.
+. Figure out how to do Dissonance and Resolution.
+. Check into making MIDI files.
+. See about using Supercollider.
+. Check out Tensorflow, and Nueral Networks.
+. Get Source Material for teaching the network.
+
+
+# ------------------------------------------------------------------------------
+# End
+# ------------------------------------------------------------------------------
+

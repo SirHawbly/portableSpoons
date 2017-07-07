@@ -18,6 +18,11 @@ import copy
 VERBOSE = True 
 
 
+## define a440 
+## the note ill center this pieceof code on
+a440 = 440
+
+
 # ------------------------------------------------------------------------------
 
 
@@ -118,6 +123,7 @@ def getNotes():
   possNotes = []
   tempNote = None
 
+  vprint("")
   vprint("getting all possible notes.")
 
   ## loop for all notes from A to G, all the ones in the scale.
@@ -137,13 +143,18 @@ def getNotes():
   ## now we need to add in functions to get different notes
   allNotes = []
 
-  for note in possNotes :
-    vprint (note)
+  # for note in possNotes :
+    # vprint (note)
 
+
+  ## print that we are done with this function and are 
+  ## returning the list of all the notes
+  vprint ("returning all possible notes")
+  vprint ("")
 
   ## return allNotes which now has all notes 
   ## we can reach from a given note.
-  return allNotes 
+  return  possNotes
 
 
 # ------------------------------------------------------------------------------
@@ -159,10 +170,11 @@ possibleNotes = getNotes()
 
 # did we get anything in the notes section
 vprint(str("possibleNotes: ") + str(possibleNotes))
+vprint("")
 
 # how to get into the transitions
-vprint (allTransitions["octave"])
-
+vprint (str("testing dict access: ") + str(allTransitions["octave"]))
+vprint("")
 
 # ------------------------------------------------------------------------------
 # End
