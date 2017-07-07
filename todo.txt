@@ -25,6 +25,7 @@
 # ------------------------------------------------------------------------------
 
 
+. look into modulation from chord to chord.
 . look into remembering pieces of the music for later use in a song.
 . look into filling out noteType(percentage).
 . look into filling out intervalType(effect on dissonance).
