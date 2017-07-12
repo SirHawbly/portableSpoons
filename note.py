@@ -183,6 +183,13 @@ def getMinorPentaScale(root):
 # ------------------------------------------------------------------------------
 
 
+# http://musictheorysite.com/the-circle-of-fifths/
+def getCircleOfFifths():
+  print("setting up the scale of fifths")
+  
+
+# ------------------------------------------------------------------------------
+
 def getMajor(root):
   print("getting a major")
 
