@@ -19,7 +19,7 @@ VERBOSE = True
 
 
 ## define a440 
-## the note ill center this pieceof code on
+## the note ill center this piece of code on
 a440 = 440
 
 
@@ -137,6 +137,105 @@ def vprint(string):
   if VERBOSE :
     print (string)
 
+
+# ------------------------------------------------------------------------------
+
+
+# http://musictheorysite.com/major-scales/
+def getMajorScale(root):
+  print("getting a major")
+
+  # Major scale formula
+  # W - W - H - W - W - W - H
+  
+
+# ------------------------------------------------------------------------------
+
+
+# http://musictheorysite.com/minor-scales/
+def getMinorScale(root):
+  print("getting a major")
+
+  # Natural Minor Scale Formula
+  # W - H - W - W - H - W - W
+  
+
+# ------------------------------------------------------------------------------
+
+
+# http://musictheorysite.com/minor-scales/
+def getMajorPentaScale(root):
+  print("getting a major")
+
+  # Get the notes 1, 2, 3, 5, 6.  Remove the 4th and 7th.
+  
+
+# ------------------------------------------------------------------------------
+
+
+# http://musictheorysite.com/minor-scales/
+def getMinorPentaScale(root):
+  print("getting a major")
+
+  # Get the notes 1, 3, 4, 5, 7. Remove the 2nd and 6th,
+  
+
+# ------------------------------------------------------------------------------
+
+
+def getMajor(root):
+  print("getting a major")
+
+  # get the root, the major third and the perf fifth,
+  # maybe a seventh or ninth as well.
+  
+
+# ------------------------------------------------------------------------------
+
+
+def getMinor(root):
+  print("getting a minor")
+
+  # get the root, the minor third and the perf fifth,
+  # maybe a seventh or ninth as well.
+
+# ------------------------------------------------------------------------------
+
+
+def getAugmented(root):
+  print("getting a aug")
+
+  # get a root, a major third, and a augmented fifth,
+  # (raise the perf fifth a half step).
+
+
+# ------------------------------------------------------------------------------
+
+
+def getDiminished(root):
+  print("getting a dim")
+
+  # get a root, a minor third, and a diminished fifth,
+  # (lower the perf fifth a half step).
+  
+
+# ------------------------------------------------------------------------------
+
+
+def getSus2(root):
+  print("getting a dim")
+
+  # get a root, a major second, and a perf fifth,
+  
+
+# ------------------------------------------------------------------------------
+
+
+def getSus4(root):
+  print("getting a dim")
+
+  # get a root, a perf fourth, and a perf fifth,
+  
 
 # ------------------------------------------------------------------------------
 
