@@ -51,6 +51,8 @@ intervalType = {
   'major'      : 0, ## song is, with the more dissonant it becomes,
   'augmented'  : 0, ## the more probable the consonance upcoming.
   'diminished' : 0, ## 
+  'sus2'       : 0, ##
+  'sus4'       : 0, ##
 }
 
 
@@ -235,7 +237,7 @@ def getDiminished(root):
 
 
 def getSus2(root):
-  print("getting a dim")
+  print("getting a sus2")
 
   # get a root, a major second, and a perf fifth,
   
@@ -244,7 +246,7 @@ def getSus2(root):
 
 
 def getSus4(root):
-  print("getting a dim")
+  print("getting a sus4")
 
   # get a root, a perf fourth, and a perf fifth,
   
