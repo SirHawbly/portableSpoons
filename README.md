@@ -6,4 +6,7 @@
 -->
 
 # portableSpoons
+
+Copyright (c) 2017 Christopher Bartlett
+
 A music generation tool written in python.
