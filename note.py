@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
   * Copyright (c) 2017 Christopher Bartlett
   * [This program is licensed under the "GPL License"]
@@ -11,6 +13,7 @@
 
 
 import copy
+from midiutil import MIDIFile
 
 
 # ------------------------------------------------------------------------------
@@ -149,23 +152,57 @@ def vprint(string):
 
 
 # http://musictheorysite.com/major-scales/
-def getMajorScale(root):
-  print("getting a major")
+def getMajorScale(root, notes):
+  vprint("getting " + str(root) + " major scale")
+
+  # set up an set with the root inside
+  i = 0
+  scale = [root]
+
+  if root in notes :
+      i = notes.index(root)
+  else :
+      print("ERROR: note " + str(root) + " not in " + str(notes))
 
   # Major scale formula
   # W - W - H - W - W - W - H
-  
+  for value in ['W', 'W', 'H', 'W', 'W', 'W', 'H'] :
+    if (value == 'W') :
+      i += 2
+    else :
+      i += 1
+    scale += [notes[i % len(notes)]]
+
+  return scale
+
 
 # ------------------------------------------------------------------------------
 
 
 # http://musictheorysite.com/minor-scales/
-def getMinorScale(root):
-  print("getting a major")
+def getMinorScale(root, notes):
+  vprint("getting " + str(root) + " minor scale")
+
+  # set up an set with the root inside
+  i = 0
+  scale = [root]
+
+  if root in notes :
+      i = notes.index(root)
+  else :
+      print("ERROR: note " + str(root) + " not in " + str(notes))
 
   # Natural Minor Scale Formula
   # W - H - W - W - H - W - W
-  
+  for value in ['W', 'H', 'W', 'W', 'H', 'W', 'W'] :
+    if (value == 'W') :
+      i += 2
+    else :
+      i += 1
+    scale += [notes[i % len(notes)]]
+
+  return scale
+
 
 # ------------------------------------------------------------------------------
 
@@ -314,6 +351,11 @@ vprint("")
 # how to get into the transitions
 vprint (str("testing dict access: ") + str(allTransitions["octave"]))
 vprint("")
+
+vprint(getMajorScale('A#', possibleNotes))
+vprint(getMinorScale('F#', possibleNotes))
+vprint("")
+
 
 # ------------------------------------------------------------------------------
 # End
