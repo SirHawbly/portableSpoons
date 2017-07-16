@@ -53,7 +53,7 @@ intervalType = {
   'minor'      : 0, ## these will have impact on how dissonant a 
   'major'      : 0, ## song is, with the more dissonant it becomes,
   'augmented'  : 0, ## the more probable the consonance upcoming.
-  'diminished' : 0, ## 
+  'diminished' : 0, ##
   'sus2'       : 0, ##
   'sus4'       : 0, ##
 }
@@ -294,7 +294,7 @@ def getSus4(root):
 # defines the function that is used to populate the list 
 # of all possible notes, and their definitions.  This includes 
 # their fourths, fifths, etc.
-def getNotes():
+def getAllPossibleNotes():
   
   possNotes = []
   tempNote = None
@@ -334,6 +334,19 @@ def getNotes():
 
 
 # ------------------------------------------------------------------------------
+
+
+# given a note, its octave, and its length, make a tuple out of it,
+# to be used in generating a list (song).
+def makeNote (note, octave, length) :
+  return {
+            'note'   : note,
+            'octave' : octave,
+            'length' : length,
+         }
+
+
+# ------------------------------------------------------------------------------
 # Execution
 # ------------------------------------------------------------------------------
 
@@ -341,20 +354,21 @@ def getNotes():
 chain = ""
 newLink  = ""
 
-# call the getNotes function to populate all possible notes
-possibleNotes = getNotes()
+# call the getAllPossibleNotes function to populate all possible notes
+possibleNotes = getAllPossibleNotes()
 
 # did we get anything in the notes section
-vprint(str("possibleNotes: ") + str(possibleNotes))
-vprint("")
+# vprint(str("possibleNotes: ") + str(possibleNotes))
+# vprint("")
 
 # how to get into the transitions
-vprint (str("testing dict access: ") + str(allTransitions["octave"]))
-vprint("")
+# vprint (str("testing dict access: ") + str(allTransitions["octave"]))
+# vprint("")
 
-vprint(getMajorScale('A#', possibleNotes))
-vprint(getMinorScale('F#', possibleNotes))
-vprint("")
+# checking the scale functions.
+# vprint(getMajorScale('A#', possibleNotes))
+# vprint(getMinorScale('F#', possibleNotes))
+# vprint("")
 
 
 # ------------------------------------------------------------------------------
