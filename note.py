@@ -13,7 +13,7 @@
 
 
 import copy
-from midiutil import MIDIFile
+from midiutil.MidiFile import MIDIFile
 
 
 # ------------------------------------------------------------------------------
@@ -338,12 +338,53 @@ def getAllPossibleNotes():
 
 # given a note, its octave, and its length, make a tuple out of it,
 # to be used in generating a list (song).
-def makeNote (note, octave, length) :
+def makeNote (note, octave, length, volume) :
   return {
             'note'   : note,
             'octave' : octave,
             'length' : length,
+            'volume' : volume,
+            # 'tempo'  : tempo,
          }
+
+
+# ------------------------------------------------------------------------------
+
+
+# given a string of notes, their intervals and their sequence,
+# output them to a midifile, of a given name.
+def writeToMidi(title, tempo, notes) :
+
+  # open up the media file.
+  mf = MIDIFile(1, adjust_origin=1)
+
+  track    = 0
+  time     = 0
+  temptime = 0
+  channel  = 0
+  volume   = 100
+ 
+  # initialize the first track.
+  mf.addTrackName(track, time, title)
+
+
+  for chord in notes :
+    for sound in chord :
+      
+      # save the time interval for the notes.  
+      # they should all be the same within the chord.
+      # TODO make a way to put rest notes in this.
+      temptime = sound["time"]
+
+      # add the note to the midi track
+      mf.addNote(track, channel, MIDIpitch(sound["note"]), \
+              sound["time"], sound["length"], sound["volume"])
+
+    # increase the time counter
+    time += temptime
+
+  with open(title, 'wb') as outf:
+    mf.writeFile(outf)
 
 
 # ------------------------------------------------------------------------------
@@ -374,3 +415,5 @@ possibleNotes = getAllPossibleNotes()
 # ------------------------------------------------------------------------------
 # End
 # ------------------------------------------------------------------------------
+
+
