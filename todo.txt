@@ -16,6 +16,12 @@
 . Create a list of all transitions for a note.
 . make sublists for consonance/dissonance.
 . Check out how to make Chords.
+. Check into making MIDI files.
+. write a function to output notes to a midifile.
+. install timidity.
+. find a way to convert notes to MIDI pitch.
+. find a way to store a song using lists.
+. divide note.py into two files.
 
 
 # ------------------------------------------------------------------------------
@@ -23,6 +29,7 @@
 # ------------------------------------------------------------------------------
 
 
+. look into making a class for a note/chord in a song (not just a list?)
 . check into barts apply license stuff in his github.
 . paste the licensing into all files im going to use.
 . Check out Markov Chains, and Implement them.
@@ -34,6 +41,7 @@
 # ------------------------------------------------------------------------------
 
 
+. look into making a tool to use command-line interface.
 . look into modulation from chord to chord.
 . look into remembering pieces of the music for later use in a song.
 . look into filling out noteType(percentage).
@@ -42,10 +50,10 @@
 . fill out the scale functions.
 . Look at making multiple instruments.
 . Figure out how to do Dissonance and Resolution.
-. Check into making MIDI files.
 . See about using Supercollider.
 . Check out Tensorflow, and Nueral Networks.
 . Get Source Material for teaching the network.
+. Make a shell script to create and play a song.
 
 
 # ------------------------------------------------------------------------------
