@@ -8,7 +8,7 @@
 """
 
 # ------------------------------------------------------------------------------
-# Packages 
+# Packages
 # ------------------------------------------------------------------------------
 
 
@@ -21,20 +21,23 @@ from midiutil.MidiFile import MIDIFile
 # ------------------------------------------------------------------------------
 
 
-## this is the verbosity variable, set
-## it to true when you need information.
+# this is the verbosity variable, set
+# it to true when you need information.
 VERBOSE = True 
 
 
-## define a440 
-## the note ill center this piece of code on
+# ------------------------------------------------------------------------------
+
+
+# define a440 
+# the note ill center this piece of code on
 a440 = 440
 
 
 # ------------------------------------------------------------------------------
 
 
-## defines the variable that will define the notes in a chord
+# defines the variable that will define the notes in a chord
 noteType = {
   'note'     : 1, ## most likely for bass?
   'interval' : 2, ## most likely for drums?
@@ -47,8 +50,8 @@ noteType = {
 # ------------------------------------------------------------------------------
 
 
-## defines the variable that will talk about how a 
-## chord is composed, TODO
+# defines the variable that will talk about how a 
+# chord is composed, TODO
 intervalType = {
   'minor'      : 0, ## these will have impact on how dissonant a 
   'major'      : 0, ## song is, with the more dissonant it becomes,
@@ -62,10 +65,10 @@ intervalType = {
 # ------------------------------------------------------------------------------
 
 
-## derived from 
-##   https://en.wikipedia.org/wiki/Consonance_and_dissonance#Consonance
+# derived from 
+#   https://en.wikipedia.org/wiki/Consonance_and_dissonance#Consonance
 
-## these are lists of all the perfect and imperfect consonances 
+# these are lists of all the perfect and imperfect consonances 
 allConsonances = {
   'perfect'   : ['unisons', 'octaves', 'fourths', 'fifths'],
   'imperfect' : ['majorThirds', 'minorSixths', 'minorThirds', 'majorSixths'],
@@ -75,10 +78,10 @@ allConsonances = {
 # ------------------------------------------------------------------------------
 
 
-## derived from
-##  http://www2.siba.fi/muste1/index.php?id=65&la=en
+# derived from
+#  http://www2.siba.fi/muste1/index.php?id=65&la=en
 
-## these are lists of all the hard and soft dissonances. 
+# these are lists of all the hard and soft dissonances. 
 allDissonances = {
   'sharp' : ['minorSecond', 'majorSeventh'],
   'soft'  : ['majorSeconds', 'minorSeventh', 'tritone'],
@@ -88,11 +91,11 @@ allDissonances = {
 # ------------------------------------------------------------------------------
 
 
-## derived from the list of links at 
-##   https://en.wikipedia.org/wiki/Consonance_and_dissonance#Consonance
+# derived from the list of links at 
+#   https://en.wikipedia.org/wiki/Consonance_and_dissonance#Consonance
 
-## this dictionary contains all of the ways to reach notes either 
-## via semitones or via frequencies, as im not sure which i will be using.
+# this dictionary contains all of the ways to reach notes either 
+# via semitones or via frequencies, as im not sure which i will be using.
 allTransitions = {
   # https://en.wikipedia.org/wiki/Unison
   'unison'      : [[0], [[1/1]]],            ## +00 semis
@@ -338,14 +341,44 @@ def getAllPossibleNotes():
 
 # given a note, its octave, and its length, make a tuple out of it,
 # to be used in generating a list (song).
-def makeNote (note, octave, length, volume) :
+def makeNote (note, octave, length, volume, time) :
   return {
             'note'   : note,
             'octave' : octave,
             'length' : length,
             'volume' : volume,
+            'time'   : time,
+            # TODO ADD TEMPO AND VOLUME
             # 'tempo'  : tempo,
+            # 'volume' : volume,
          }
+
+
+# ------------------------------------------------------------------------------
+
+
+# given a note and octave, turn that into a midi pitch
+def MIDIpitch(note, octave) :
+
+  possibleNotes = getAllPossibleNotes()
+  vprint(possibleNotes)
+
+  # midi middle C (C4)
+  pitch = 60
+
+  # get from C to A, (C -> B -> Bb -> A)
+  pitch = pitch - 3
+
+  # take off or add 12 to pitch per octave
+  pitch = pitch + (12 * octave)
+
+  # add on pitch per location in possible notes 
+  pitch = pitch + possibleNotes.index(note)
+
+  # print out the results
+  vprint(str(note) + ":" + str(octave) + " -> " + str(pitch))
+
+  return pitch
 
 
 # ------------------------------------------------------------------------------
@@ -359,44 +392,51 @@ def writeToMidi(title, tempo, notes) :
   mf = MIDIFile(1, adjust_origin=1)
 
   track    = 0
-  time     = 0
+  time     = 0.0
   temptime = 0
   channel  = 0
   volume   = 100
- 
+
   # initialize the first track.
   mf.addTrackName(track, time, title)
+  mf.addTempo(track, time, tempo * 16)
 
-
+  # notes should be a list of lists, with notes in the 
+  # sub lists occuring at the same time.
   for chord in notes :
     for sound in chord :
-      
+
       # save the time interval for the notes.  
       # they should all be the same within the chord.
-      # TODO make a way to put rest notes in this.
-      temptime = sound["time"]
 
-      # add the note to the midi track
-      mf.addNote(track, channel, MIDIpitch(sound["note"]), \
-              sound["time"], sound["length"], sound["volume"])
+      # vprint(sound)
+
+      # temptime = sound["time"]
+
+      # add the note to the midi track if its not a rest
+      if (sound['note'] != 'R') :
+        mf.addNote(track, channel, MIDIpitch(sound['note'], sound['octave']), \
+                sound['time'], sound['length'], sound['volume'])
 
     # increase the time counter
-    time += temptime
+    # time += temptime
 
   with open(title, 'wb') as outf:
     mf.writeFile(outf)
 
+
+# moving all of this to makeSong.py !!!
 
 # ------------------------------------------------------------------------------
 # Execution
 # ------------------------------------------------------------------------------
 
 
-chain = ""
-newLink  = ""
+# chain = ""
+# newLink  = ""
 
 # call the getAllPossibleNotes function to populate all possible notes
-possibleNotes = getAllPossibleNotes()
+# possibleNotes = getAllPossibleNotes()
 
 # did we get anything in the notes section
 # vprint(str("possibleNotes: ") + str(possibleNotes))
