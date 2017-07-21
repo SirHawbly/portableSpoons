@@ -212,7 +212,7 @@ def getMinorScale(root, notes):
 
 # http://musictheorysite.com/minor-scales/
 def getMajorPentaScale(root):
-  print("getting a major")
+  print("getting a major penta")
 
   # Get the notes 1, 2, 3, 5, 6.  Remove the 4th and 7th.
   
@@ -222,7 +222,7 @@ def getMajorPentaScale(root):
 
 # http://musictheorysite.com/minor-scales/
 def getMinorPentaScale(root):
-  print("getting a major")
+  print("getting a minor Penta")
 
   # Get the notes 1, 3, 4, 5, 7. Remove the 2nd and 6th,
   

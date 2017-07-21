@@ -29,6 +29,7 @@
 # ------------------------------------------------------------------------------
 
 
+. make a getScale function based off of intervals (delete duplicate code)
 . look into making a class for a note/chord in a song (not just a list?)
 . check into barts apply license stuff in his github.
 . paste the licensing into all files im going to use.
