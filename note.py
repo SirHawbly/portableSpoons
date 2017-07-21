@@ -425,35 +425,4 @@ def writeToMidi(title, tempo, notes) :
     mf.writeFile(outf)
 
 
-# moving all of this to makeSong.py !!!
-
 # ------------------------------------------------------------------------------
-# Execution
-# ------------------------------------------------------------------------------
-
-
-# chain = ""
-# newLink  = ""
-
-# call the getAllPossibleNotes function to populate all possible notes
-# possibleNotes = getAllPossibleNotes()
-
-# did we get anything in the notes section
-# vprint(str("possibleNotes: ") + str(possibleNotes))
-# vprint("")
-
-# how to get into the transitions
-# vprint (str("testing dict access: ") + str(allTransitions["octave"]))
-# vprint("")
-
-# checking the scale functions.
-# vprint(getMajorScale('A#', possibleNotes))
-# vprint(getMinorScale('F#', possibleNotes))
-# vprint("")
-
-
-# ------------------------------------------------------------------------------
-# End
-# ------------------------------------------------------------------------------
-
-
