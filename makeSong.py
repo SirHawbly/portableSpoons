@@ -58,8 +58,8 @@ def convertNotes(song) :
             # 1st meter
   for i in song :
 
-      # makeNote (note, octave, length, volume, time) 
-      #                          note  octv  length                  vol  time
+      #               makeNote(note, octave, length, volume, time) 
+      #                        note  octv  length                  vol  time
       ns.append([note.makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
       time += int(16 * i[2] / i[3])
 
@@ -94,12 +94,32 @@ newLink  = []
 # vprint(getMinorScale('F#', possibleNotes))
 # vprint("")
 
-testSong = convertNotes(overTheRainbow)
-note.writeToMidi("overTheRainbow.mid", 60, testSong)
+#testSong = convertNotes(overTheRainbow)
+#note.writeToMidi("overTheRainbow.mid", 60, testSong)
 
-testSong = convertNotes(hotcrossBuns)
-note.writeToMidi("hotcrossBuns.mid", 30, testSong)
+#testSong = convertNotes(hotcrossBuns)
+#note.writeToMidi("hotcrossBuns.mid", 30, testSong)
 
+melody1 = [1,1,4,1]
+melody2 = [1,3,4,2,2,5,1,5]
+list1 = []
+
+GsMajor = note.getMajorScale("G#", note.possibleNotes)
+
+print(GsMajor)
+
+for n in melody2 :
+  if (n == 8) :
+    octave = 1
+  else : 
+    octave = 0
+
+  list1.append([GsMajor[n - 1], octave, 1, 4])
+
+print(list1)
+
+testSong = convertNotes(list1)
+note.writeToMidi("melody1.mid", 60, testSong)
 
 # ------------------------------------------------------------------------------
 # End

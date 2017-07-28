@@ -30,7 +30,7 @@ VERBOSE = True
 
 
 # define a440 
-# the note ill center this piece of code on
+# the note ill center this piece of code on sometime in the future....
 a440 = 440
 
 
@@ -213,7 +213,7 @@ def getMinorScale(root, notes):
 # http://musictheorysite.com/minor-scales/
 def getMajorPentaScale(root):
   print("getting a major penta")
-
+  # TODO
   # Get the notes 1, 2, 3, 5, 6.  Remove the 4th and 7th.
   
 
@@ -223,7 +223,7 @@ def getMajorPentaScale(root):
 # http://musictheorysite.com/minor-scales/
 def getMinorPentaScale(root):
   print("getting a minor Penta")
-
+  # TODO
   # Get the notes 1, 3, 4, 5, 7. Remove the 2nd and 6th,
   
 
@@ -232,12 +232,14 @@ def getMinorPentaScale(root):
 
 # http://musictheorysite.com/the-circle-of-fifths/
 def getCircleOfFifths():
+  # TODO
   print("setting up the scale of fifths")
   
 
 # ------------------------------------------------------------------------------
 
 def getMajor(root):
+  # TODO
   print("getting a major")
 
   # get the root, the major third and the perf fifth,
@@ -248,6 +250,7 @@ def getMajor(root):
 
 
 def getMinor(root):
+  # TODO
   print("getting a minor")
 
   # get the root, the minor third and the perf fifth,
@@ -257,6 +260,7 @@ def getMinor(root):
 
 
 def getAugmented(root):
+  # TODO
   print("getting a aug")
 
   # get a root, a major third, and a augmented fifth,
@@ -267,6 +271,7 @@ def getAugmented(root):
 
 
 def getDiminished(root):
+  # TODO
   print("getting a dim")
 
   # get a root, a minor third, and a diminished fifth,
@@ -277,6 +282,7 @@ def getDiminished(root):
 
 
 def getSus2(root):
+  # TODO
   print("getting a sus2")
 
   # get a root, a major second, and a perf fifth,
@@ -286,6 +292,7 @@ def getSus2(root):
 
 
 def getSus4(root):
+  # TODO
   print("getting a sus4")
 
   # get a root, a perf fourth, and a perf fifth,
@@ -360,9 +367,6 @@ def makeNote (note, octave, length, volume, time) :
 # given a note and octave, turn that into a midi pitch
 def MIDIpitch(note, octave) :
 
-  possibleNotes = getAllPossibleNotes()
-  vprint(possibleNotes)
-
   # midi middle C (C4)
   pitch = 60
 
@@ -423,6 +427,14 @@ def writeToMidi(title, tempo, notes) :
 
   with open(title, 'wb') as outf:
     mf.writeFile(outf)
+
+
+# ------------------------------------------------------------------------------
+# Global Variables
+# ------------------------------------------------------------------------------
+
+
+possibleNotes = getAllPossibleNotes()
 
 
 # ------------------------------------------------------------------------------
