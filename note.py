@@ -211,7 +211,7 @@ def getMinorScale(root, notes):
 
 
 # http://musictheorysite.com/pentatonic-scales/
-def getMajorPentaScale(root):
+def getMajorPentaScale(root, notes):
   vprint("getting " + str(root) + " majpenta scale")
 
   i = 0
@@ -223,12 +223,10 @@ def getMajorPentaScale(root):
       print("ERROR: note " + str(root) + " not in " + str(notes))
 
   # Get the notes 1, 2, 3, 5, 6.  Remove the 4th and 7th.
-  for value in ['H', 'H', 'H', 'W', 'H'] : 
-    if (value == 'W') :
-      i += 2
-    else :
-      i += 1
+  for value in [2, 2, 3, 2] : 
+    i += value
     scale += [notes[i % len(notes)]]
+    
 
   return scale
 
@@ -237,8 +235,8 @@ def getMajorPentaScale(root):
 
 
 # http://musictheorysite.com/pentatonic-scales/
-def getMinorPentaScale(root):
-  vprint("getting " + str(root) + " majpenta scale")
+def getMinorPentaScale(root, notes):
+  vprint("getting " + str(root) + " minpenta scale")
 
   i = 0
   scale = [root]
@@ -249,11 +247,8 @@ def getMinorPentaScale(root):
       print("ERROR: note " + str(root) + " not in " + str(notes))
 
   # Get the notes 1, 3, 4, 5, 7. Remove the 2nd and 6th,
-  for value in ['H', 'W', 'H', 'H', 'W'] : 
-    if (value == 'W') :
-      i += 2
-    else :
-      i += 1
+  for value in [3, 2, 2, 3] : 
+    i += value
     scale += [notes[i % len(notes)]]
 
   return scale
@@ -270,18 +265,30 @@ def getCircleOfFifths():
 
 # ------------------------------------------------------------------------------
 
-def getMajor(root):
+def getMajor(root, notes):
   print("getting a major")
 
   # get the root, the major third and the perf fifth,
   # maybe a seventh or ninth as well.
-  
-  
+
+  i = 0
+  chord = [root]
+
+  if root in notes :
+    i = notes.index(root)
+  else :
+    print("ERROR: note " + str(root) + " not in " + str(notes))
+
+  for note in ['majorThird', 'fifth', 'majorSeventh'] :
+    j = (allTransitions[note])[0]
+    chord += notes[(i+j[0]) % len(notes)]
+
+  return chord
 
 # ------------------------------------------------------------------------------
 
 
-def getMinor(root):
+def getMinor(root, notes):
   # TODO
   print("getting a minor")
 
@@ -467,6 +474,8 @@ def writeToMidi(title, tempo, notes) :
 
 
 possibleNotes = getAllPossibleNotes()
-
+print (getMajor('C', possibleNotes))
+print (getMajorPentaScale('C', possibleNotes))
+print (getMinorPentaScale('E', possibleNotes))
 
 # ------------------------------------------------------------------------------
