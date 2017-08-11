@@ -22,6 +22,8 @@
 . find a way to convert notes to MIDI pitch.
 . find a way to store a song using lists.
 . divide note.py into two files.
+. check into barts apply license stuff in his github.
+. Make a shell script to create and play a song. (NOT GOING TO DO)
 
 
 # ------------------------------------------------------------------------------
@@ -33,10 +35,10 @@
 . look at generating melodies
 . make a getScale function based off of intervals (delete duplicate code)
 . look into making a class for a note/chord in a song (not just a list?)
-. check into barts apply license stuff in his github.
 . paste the licensing into all files im going to use.
 . Check out Markov Chains, and Implement them.
 . Look into chord composition.
+. find out if there is a way to define a sound wave.
 
 
 # ------------------------------------------------------------------------------
@@ -44,6 +46,9 @@
 # ------------------------------------------------------------------------------
 
 
+. look into WAV format writting.
+. finish circle of fifths.
+. write the chord-getter functions.
 . look into making a tool to use command-line interface.
 . look into modulation from chord to chord.
 . look into remembering pieces of the music for later use in a song.
@@ -56,7 +61,6 @@
 . See about using Supercollider.
 . Check out Tensorflow, and Nueral Networks.
 . Get Source Material for teaching the network.
-. Make a shell script to create and play a song.
 
 
 # ------------------------------------------------------------------------------
