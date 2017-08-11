@@ -14,7 +14,7 @@
 # ------------------------------------------------------------------------------
 
 
-import note
+import notes
 
 
 # ------------------------------------------------------------------------------
@@ -55,17 +55,21 @@ def convertNotes(song) :
   time  = 0
   ns    = []
 
-            # 1st meter
+  notes.vprint("")
+  notes.vprint("adding a octave, and duration to every note...")
   for i in song :
 
       #               makeNote(note, octave, length, volume, time) 
       #                        note  octv  length                  vol  time
-      ns.append([note.makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
+      ns.append([notes.makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
       time += int(16 * i[2] / i[3])
 
   # printing all notes in the song
   for n in ns :
-    note.vprint(n)
+    notes.vprint(n)
+
+  notes.vprint("done with converting")
+  notes.vprint("")
 
   return ns
 
@@ -100,26 +104,41 @@ newLink  = []
 #testSong = convertNotes(hotcrossBuns)
 #note.writeToMidi("hotcrossBuns.mid", 30, testSong)
 
+notes.vprint("")
+notes.vprint("Starting Midi.py")
+
+# testing these random note paths
 melody1 = [1,1,4,1]
 melody2 = [1,3,4,2,2,5,1,5]
 list1 = []
 
-GsMajor = note.getMajorScale("G#", note.possibleNotes)
+# getting the G sharp Scale to put the path on
+GsMajor = notes.getMajorScale("G#", notes.possibleNotes)
+notes.vprint(GsMajor)
 
-print(GsMajor)
-
+# play the melody on the scale provided
 for n in melody2 :
   if (n == 8) :
     octave = 1
   else : 
     octave = 0
-
   list1.append([GsMajor[n - 1], octave, 1, 4])
 
-print(list1)
+notes.vprint("printing the notes in list1")
+notes.vprint(list1)
+notes.vprint("")
 
+# convert the list of notes to give them a duration and 
+# a octave and a note all in a list.
 testSong = convertNotes(list1)
-note.writeToMidi("melody1.mid", 60, testSong)
+
+notes.vprint("")
+notes.vprint("writing notes to MIDI file")
+notes.writeToMidi("melody1.mid", 60, testSong)
+
+# print completion message
+notes.vprint("done with midi.py")
+notes.vprint("")
 
 # ------------------------------------------------------------------------------
 # End
