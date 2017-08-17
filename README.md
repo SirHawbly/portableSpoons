@@ -14,17 +14,26 @@ A music generation tool written in Python.  This software was written to help me
 
 # Status
 
-Right now, This software is in the begining stages of development.  The features that have been completed are outputting to midi, and creating some test songs that are pre-written.  Some of the next things that need to be implemented are outputting to something SuperCollider can parse, stringing notes together in a nice way, and creating multiple parts/instruments for a song.
+Right now, This software is in the beggining stages of development.  The features that have been completed are outputting to midi, and creating some test songs that are pre-written.  Some of the next things that need to be implemented are outputting to something SuperCollider can parse, stringing notes together in a nice way, and creating multiple parts/instruments for a song.
 
 More information about the Status of the project can be found in the todo.txt file.
 
 
 # Usage
 
-Right now, the code is ran in the makeSong.py file.  This will most likely be shifted into the createSong.sh script.
+To start off, you will need to clone this repo.  
+
+In order to run the files in this project, you will need some specific tools:
+  . Python
+  . Midiutil (a python library)
+  . A Midi Player (I use Timidity on linux) 
+  . A Wav Player
+  . and eventually SuperCollider
+
+Right now, the code for testing Midi output is ran in the midi.py file.  This will most likely be shifted into the createSong.sh script at a later date.
 
 You can make two test midi files by running :
- `python makeSong.py`
+ `python midi.py`
 
 More features will be implemented as the project goes on.
 
