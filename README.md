@@ -22,18 +22,24 @@ More information about the Status of the project can be found in the todo.txt fi
 # Usage
 
 To start off, you will need to clone this repo.  
+  `git clone https://github.com/christopherbar/portableSpoons.git`  
 
 In order to run the files in this project, you will need some specific tools:  
-  . Python  
-  . Midiutil (a python library)  
-  . A Midi Player (I use Timidity on linux)   
-  . A Wav Player  
-  . and eventually SuperCollider  
+  . Python, to run the code that will make all of this work.  
+  . Somthing like Pip, to install python libraries.
+  . MidiUtil (a python Midi library), to create and read midi files.  
+  . A Midi Player (I use Timidity on linux), so that you can check your outputs.   
+  . A Wav Player, to check your Wav output.  
+  . and eventually SuperCollider, assuming I get that far.  
   
 Right now, the code for testing Midi output is ran in the midi.py file.  This will most likely be shifted into the createSong.sh script at a later date.
 
 You can make two test midi files by running :
  `python midi.py`
+
+A nice thing to look at is using VirtualEnvironment for python.  It is very helpful for installing MidiUtil restrictive environments.  
+
+A good page on this is at: http://docs.python-guide.org/en/latest/dev/virtualenvs/.  
 
 More features will be implemented as the project goes on.
 
