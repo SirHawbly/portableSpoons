@@ -48,8 +48,34 @@ hotcrossBuns = [['B',00, 1,4],['A',00, 1,4],['G',-1, 1,4],['R',00, 1,4],
 # ------------------------------------------------------------------------------
 
 
-# populates a list of notes that contains the 
-# first 6 measures of over the rainbow
+# given a note and octave, add (1,4) to the end
+# for use in creating writable notes.
+def makeQuarterNote(note) :
+  if (len(note) == 2) :
+    notes.vprint("hey this is a good note.")
+    return note + (1,4)
+  else :
+    notes.vprint("ERROR: note had too many fields")
+
+
+# ------------------------------------------------------------------------------
+
+
+# given a note and octave, add (1,2) to the end
+# for use in creating writable notes.
+def makeHalfNote(note) :
+  if (len(note) == 2) :
+    notes.vprint("hey this is a good note.")
+    return note + (1,2)
+  else :
+    notes.vprint("ERROR: note had too many fields")
+
+
+# ------------------------------------------------------------------------------
+
+
+# given a list of notes, octaves, and times (A, 1, 1,4) 
+# create note objects that can be written to a file.
 def convertNotes(song) :
 
   time  = 0
@@ -107,6 +133,10 @@ newLink  = []
 notes.vprint("")
 notes.vprint("Starting Midi.py")
 
+# change the verbosity variable
+if not (input('Verbose? ')) :
+    notes.VERBOSE = False
+
 # testing these random note paths
 melody1 = [1,1,4,1]
 melody2 = [1,3,4,2,2,5,1,5]
@@ -135,6 +165,10 @@ testSong = convertNotes(list1)
 notes.vprint("")
 notes.vprint("writing notes to MIDI file")
 notes.writeToMidi("melody1.mid", 60, testSong)
+notes.vprint("")
+
+# test the halfNote function
+print (makeHalfNote(('B', 1)))
 
 # print completion message
 notes.vprint("done with midi.py")
