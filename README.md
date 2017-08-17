@@ -34,12 +34,12 @@ In order to run the files in this project, you will need some specific tools:
   
 Right now, the code for testing Midi output is ran in the midi.py file.  This will most likely be shifted into the createSong.sh script at a later date.
 
-You can make two test midi files by running :
+You can make two test midi files by running :  
  `python midi.py`
 
-A nice thing to look at is using VirtualEnvironment for python.  It is very helpful for installing MidiUtil restrictive environments.  
+A nice thing to look at is using a Python Virtual Environment like "virtualenv".  It is very helpful for installing MidiUtil restrictive environments.  
 
-A good page on this is at: http://docs.python-guide.org/en/latest/dev/virtualenvs/.  
+A good page on Virtualenv is at: http://docs.python-guide.org/en/latest/dev/virtualenvs/.  
 
 More features will be implemented as the project goes on.
 
