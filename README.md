@@ -26,7 +26,7 @@ To start off, you will need to clone this repo.
 
 In order to run the files in this project, you will need some specific tools:  
   . Python, to run the code that will make all of this work.  
-  . Somthing like Pip, to install python libraries.
+  . Somthing like Pip, to install python libraries.  
   . MidiUtil (a python Midi library), to create and read midi files.  
   . A Midi Player (I use Timidity on linux), so that you can check your outputs.   
   . A Wav Player, to check your Wav output.  
