@@ -23,13 +23,13 @@ More information about the Status of the project can be found in the todo.txt fi
 
 To start off, you will need to clone this repo.  
 
-In order to run the files in this project, you will need some specific tools:
-  . Python
-  . Midiutil (a python library)
-  . A Midi Player (I use Timidity on linux) 
-  . A Wav Player
-  . and eventually SuperCollider
-
+In order to run the files in this project, you will need some specific tools:  
+  . Python  
+  . Midiutil (a python library)  
+  . A Midi Player (I use Timidity on linux)   
+  . A Wav Player  
+  . and eventually SuperCollider  
+  
 Right now, the code for testing Midi output is ran in the midi.py file.  This will most likely be shifted into the createSong.sh script at a later date.
 
 You can make two test midi files by running :
