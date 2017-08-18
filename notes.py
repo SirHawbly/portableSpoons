@@ -266,7 +266,7 @@ def getCircleOfFifths():
 # ------------------------------------------------------------------------------
 
 def getMajor(root, notes):
-  print("getting a " + str(root) +  " major scale")
+  print("getting a " + str(root) +  " major chord")
 
   # get the root, the major third and the perf fifth,
   # maybe a seventh or ninth as well.
@@ -469,22 +469,14 @@ def writeToMidi(title, tempo, notes) :
 
 
 # ------------------------------------------------------------------------------
-# Global Variables
+# New Variables
 # ------------------------------------------------------------------------------
 
 
+# need this for later, function was jsut defined
 possibleNotes = getAllPossibleNotes()
 
-vprint ("")
-vprint ("testing scales in notes.py")
-vprint (getMajor('C', possibleNotes))
 
-vprint ("")
-vprint (getMajorPentaScale('C', possibleNotes))
-
-vprint ("")
-vprint (getMinorPentaScale('E', possibleNotes))
-
-vprint ("done with scales")
-vprint ("")
+# ------------------------------------------------------------------------------
+# End
 # ------------------------------------------------------------------------------
