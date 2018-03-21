@@ -49,6 +49,7 @@
 # ------------------------------------------------------------------------------
 
 
+. look into using pytorch
 . look into WAV format writting.
 . finish circle of fifths.
 . write the chord-getter functions.
