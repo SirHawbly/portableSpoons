@@ -28,7 +28,7 @@ overTheRainbow = [['R',00, 1,1],
             # 3rd meter
             ['D',-1, 1,2], ['D',00, 1,2],                                     
             # 4th meter
-            ['C',00, 1,4], ['A',00, 1,8], ['B',00, 1,8],                       
+            ['C',00, 1,4], ['A#',00, 1,8], ['B',00, 1,8],                       
             ['C',00, 1,4], ['D',00, 1,4],                                      
             # 5th meter
             ['D',-1, 1,2], ['B',00, 1,2],                                      
@@ -86,7 +86,7 @@ def convertNotes(song) :
   for i in song :
 
       #               makeNote(note, octave, length, volume, time) 
-      #                        note  octv  length                  vol  time
+      #                         note  octv  length                  vol  time
       ns.append([notes.makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
       time += int(16 * i[2] / i[3])
 

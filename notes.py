@@ -217,7 +217,7 @@ def getMajorPentaScale(root, notes):
   i = 0
   scale = [root]
   
-  if root in notes :
+  if root in notes 
       i = notes.index(root)
   else :
       print("ERROR: note " + str(root) + " not in " + str(notes))
@@ -226,7 +226,6 @@ def getMajorPentaScale(root, notes):
   for value in [2, 2, 3, 2] : 
     i += value
     scale += [notes[i % len(notes)]]
-    
 
   return scale
 
@@ -473,7 +472,7 @@ def writeToMidi(title, tempo, notes) :
 # ------------------------------------------------------------------------------
 
 
-# need this for later, function was jsut defined
+# need this for later, function was just defined
 possibleNotes = getAllPossibleNotes()
 
 

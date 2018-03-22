@@ -71,7 +71,7 @@ for n in melody2 :
     octave = 1
   else : 
     octave = 0
-  list1.append([GsMajor[n - 1], octave, 1, 4])
+  list1.append([GsMajor[n - 1], octave, .5, 3])
 
 notes.vprint("printing the notes in list1")
 notes.vprint(list1)
