@@ -14,6 +14,7 @@
 # ------------------------------------------------------------------------------
 
 
+import random
 # import notes
 
 
@@ -21,22 +22,32 @@
 # Variables
 # ------------------------------------------------------------------------------
 
-scales = [[0, 2, 2, 1, 2, 2, 2, 1], # Major
-          [0, 2, 1, 2, 2, 1, 2, 2], # Minor
-          [0, 2, 2, 3, 2], # Major Penta
-          [0, 3, 2, 2, 3], # Minor Penta
-]
-  
-chords = [[0, 4, 7], # Major Chord
-          [0, ], # Minor Chord
-          [0, 4, 7, 11], # Maj7 Chord
-          [0, ], # Min7 Chord
-          [0, ], # Aug Chord
-          [0, ], # Dim Chord
-          [0, ], # Sus2 Chord
-          [0, ], # Sus4 Chord
-          [0, ], # Circle Fifths
-]
+VERBOSE = True
+
+          # 8
+scales = {'maj' : [2, 2, 1, 2, 2, 2, 1], # Major
+          "min" : [2, 1, 2, 2, 1, 2, 2], # Minor
+          # 7
+          "dor" : [2, 1, 2, 2, 2, 1, 2], # Dorian
+          "dor" : [2, 1, 2, 2, 2, 1, 2], # Dorian
+          "mix" : [2, 2, 1, 2, 2, 1, 2], # Mixolydian
+          # 6
+          "mix" : [1, 2, 1, 1, 1, 2], # Mixolydian
+          "mix" : [1, 2, 1, 2, 1, 2], # Mixolydian
+          # 5
+          "map" : [2, 2, 3, 2], # Major Penta
+          "mip" : [3, 2, 2, 3], # Minor Penta
+}
+
+chords = {"maj" : [4, 7, 11], # Maj Chord
+          "min" : [3, 5, 10], # Min Chord
+          "aug" : [4, 8, 11], # Aug Chord
+          "dim" : [3, 6,  9], # Dim Chord
+          "su2" : [2, 7, 10], # Sus2 Chord
+          "su4" : [5, 7, 10], # Sus4 + 7th Chord
+          # finish
+          # "cir" : [0, ], # Circle Fifths
+}
 
 notechain = []
 
@@ -46,10 +57,39 @@ notechain = []
 # ------------------------------------------------------------------------------
 
 
+# defines the base printing function for this file,
+# if the VERBOSE variable is true, it will print things 
+# through out the file
+def vprint(string):
+  if VERBOSE :
+    print (string)
+
+
+# ------------------------------------------------------------------------------
+
+
+# given a note, its octave, and its length, make a tuple out of it,
+# to be used in generating a list (song).
+def makeNote (note, octave, length, volume, time) :
+  return {
+            'note'   : note,
+            'octave' : octave,
+            'length' : length,
+            'volume' : volume,
+            'time'   : time,
+            # TODO ADD TEMPO AND VOLUME
+            # 'tempo'  : tempo,
+            # 'volume' : volume,
+         }
+
+
+# ------------------------------------------------------------------------------
+
+
 # defines the function that is used to populate the list 
 # of all possible notes, and their definitions.  This includes 
 # their fourths, fifths, etc.
-def getAllPossibleNotes():
+def getAllNotes():
   
   possNotes = []
   tempNote = None
@@ -87,6 +127,34 @@ def getAllPossibleNotes():
 # ------------------------------------------------------------------------------
 
 
+def getScale(root, scale):
+  vprint("getting " + 
+          str(allNotes[root]) + 
+          " " + 
+          str(list(scales)[scale]) + 
+          " scale")
+
+  # set up an set with the root inside
+  i = 0
+  scaleNotes = [allNotes[root]]
+
+  if root <= len(allNotes) :
+    i = root
+  else :
+    print("GETSCALE ERROR: note value '" + 
+          str(root) + 
+          "' not in possible notes")
+
+  for value in scales[list(scales)[scale]] :
+    i += value
+    scaleNotes += [allNotes[i % len(allNotes)]]
+
+  return scaleNotes
+
+
+# ------------------------------------------------------------------------------
+
+
 # given a list of notes, octaves, and times (A, 1, 1,4) 
 # create note objects that can be written to a file.
 def convertNotes(song) :
@@ -94,21 +162,19 @@ def convertNotes(song) :
   time  = 0
   ns    = []
 
-  notes.vprint("")
-  notes.vprint("adding a octave, and duration to every note...")
+  vprint("\nadding a octave, and duration to every note...")
   for i in song :
 
       #               makeNote(note, octave, length, volume, time) 
-      #                        note  octv  length                  vol  time
+      #                         note  octv  length                  vol  time
       ns.append([notes.makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
       time += int(16 * i[2] / i[3])
 
   # printing all notes in the song
   for n in ns :
-    notes.vprint(n)
+    vprint(n)
 
-  notes.vprint("done with converting")
-  notes.vprint("")
+  vprint("done with converting\n")
 
   return ns
 
@@ -117,17 +183,21 @@ def convertNotes(song) :
 
 
 def gensong() :
-  ns = []
+  notes = []
+  allScales = []
+  allScalesNames = []
 
-  i = random(len(notes.possibleNotes))
-  key = notes.possibleNotes[i]
+  for i in range(1, 5) :
+    key = random.randrange(len(allNotes))
+    scaletype = random.randrange(len(scales))
+    
+    allScales += [getScale(key, scaletype), ]
+    allScalesNames += [[allNotes[key], list(scales)[scaletype]] ,]
 
-  major = notes.getMajorScale(key, notes.possibleNotes)
-  minor = notes.getMinorScale(key, notes.possibleNotes)
+  vprint(allScalesNames)
+  vprint(allScales)
 
-
-
-  return ns
+  return notes
 
 
 # ------------------------------------------------------------------------------
@@ -135,8 +205,10 @@ def gensong() :
 # ------------------------------------------------------------------------------
 
 
+allNotes = getAllNotes()
+
 chain = gensong()
-getAllPossibleNotes()
+
 
 # ------------------------------------------------------------------------------
 # End
