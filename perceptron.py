@@ -13,17 +13,42 @@
 # Packages
 # ------------------------------------------------------------------------------
 
-import classfunctions 
+
+import classfunctions
 from random import randrange
+
+
+# ------------------------------------------------------------------------------
+# Print Functions
+# ------------------------------------------------------------------------------
+
+
+VERBOSE = True
+
+# defines the base printing function for this file,
+# if the VERBOSE variable is true, it will print things 
+# through out the file
+def vprint(string):
+  if VERBOSE :
+    print (string)
 
 
 # ------------------------------------------------------------------------------
 # Song Variables
 # ------------------------------------------------------------------------------
 
+# the relative relationships between notes in a scale
+noteRelations = {
+  # allConsonants 
+  'perfect'   : [0, 7, 12], # unison, 5th, octave
+  'imperfect' : [3, 4, 8, 9], # maj3rd, min3rd, maj6th, min6th
+  # allDissonances
+  'soft' : [2, 5, 11, 13], # maj2nd, min7th, maj9th
+  'sharp'  : [1, 6, 10, 14], # min2nd, tritone, maj7th, min9th
+}
 
               # 8
-allScales = {"maj" : [2, 2, 1, 2, 2, 2, 1], # Major
+allScales = { "maj" : [2, 2, 1, 2, 2, 2, 1], # Major
               "min" : [2, 1, 2, 2, 1, 2, 2], # Minor
               # 7
               "dor" : [2, 1, 2, 2, 2, 1, 2], # Dorian
@@ -37,7 +62,7 @@ allScales = {"maj" : [2, 2, 1, 2, 2, 2, 1], # Major
               "mip" : [3, 2, 2, 3], # Minor Penta
               }
 
-allChords = {"maj" : [4, 7, 11], # Maj Chord
+allChords = { "maj" : [4, 7, 11], # Maj Chord
               "min" : [3, 5, 10], # Min Chord
               "aug" : [4, 8, 11], # Aug Chord
               "dim" : [3, 6,  9], # Dim Chord
@@ -72,60 +97,58 @@ def getAllNotes():
 
     ## add and print the note
     possNotes += [note]
-    vprint (str('adding ') + note)
+    #vprint (str('adding ') + note)
 
     ## the notes that dont have sharps are b, and e.
     if (not (note == 'B' or note == 'E')):
       tempNote = note + '#'
       possNotes += [tempNote]
-      vprint(str('adding ') + tempNote)
 
   ## print that we are done with this function and are 
   ## returning the list of all the notes
-  vprint ("returning all possible notes\n")
+  vprint ("returning all possible notes")
 
   ## return allNotes which now has all notes 
   ## we can reach from a given note.
-  allNotes = possNotes
+  return possNotes
+  
+
+# ------------------------------------------------------------------------------
+
+
+def getNoteIndex(note):
+  return allNotes.index(note)
 
 
 # ------------------------------------------------------------------------------
 
 
-def getScale(root, scale):
-  vprint("\ngetting " + 
-          str(allNotes[root]) + 
-          " " + 
-          str(list(allScales)[scale]) + 
-          " scale")
+# given an offset for the allNotes list,
+# and a scale key for the allScales list
+# output all the notes in that scale
+def getScale(rootIndex, scaleIndex):
 
-  # set up an set with the root inside
-  i = 0
-  scaleNotes = [allNotes[root]]
+  vprint("getting " + str(allNotes[rootIndex]) +
+          " " + str(scaleIndex) + " scale")
 
-  if root <= len(allNotes) :
-    i = root
-  else :
-    print("GETSCALE ERROR: note value '" + 
-          str(root) + 
-          "' not in possible notes")
+  scale = [allNotes[rootIndex], ]
+  i = rootIndex
 
-  for value in list(allScales)[list(scales)[scale]] :
-    i += value
-    scaleNotes += [allNotes[i % len(allNotes)]]
+  for dist in allScales[scaleIndex]:
+    i += dist
+    scale += [allNotes[i % len(allNotes)]]
 
-  return scaleNotes
+  return scale
 
 
 # ------------------------------------------------------------------------------
 
 
-def getNote(scales):
+def getNote(scales, i, j):
 
-  note = None
-
-  i = randrange(len(allScales))
-  j = randrange(len(allScales)[i])
+  if  not (i and j):
+    i = randrange(len(allScales))
+    j = randrange(len(allScales)[i])
 
   return allScales[i][j]
 
@@ -136,16 +159,27 @@ def getNote(scales):
 
 
 class perceptron:
+  # member variables
+  name = 0
   size   = 0
   record = {"input"  : {}, 
             "output" : {}}
-
+  nodes = [[], []]
   VERBOSE = True
 
+  # print function
   def pprint(self, string):
-    if VERBOSE:
-      print(str(string))
+    if self.VERBOSE:
+      print("\tperceptron: " + str(string))
 
+  def __init__(self, pname=0, precord = None, psize = None, pnodes = [[], []]):
+    self.name = pname
+    self.size = psize
+    self.record = precord
+    self.nodes = pnodes
+    self.pprint("newNode '" + str(self.name) + "'")
+
+# add functions that are in the class functions file
 perceptron.getInput = classfunctions.PgetInput
 perceptron.testInput = classfunctions.PtestInput
 perceptron.checkRecord = classfunctions.PcheckRecord
@@ -159,19 +193,22 @@ perceptron.getOutput = classfunctions.PgetOutput
 
 def gensong() :
   notes = []
-  allScales = []
-  allScalesNames = []
+  Scales = []
+  ScaleNames = []
+
+  vprint(len(allNotes))
+  vprint(len(allScales))
 
   for i in range(0, 5) :
-    key = random.randrange(len(allNotes))
-    scaletype = random.randrange(len(scales))
+    key = randrange(len(allNotes))
+    scaleType = randrange(len(allScales))
     
-    allScales += [getScale(key, scaletype), ]
-    allScalesNames += [[allNotes[key], list(scales)[scaletype]] ,]
+    Scales += [getScale(key, scaleType), ]
+    ScaleNames += [[allNotes[key], list(allScales)[scaleType]] ,]
 
     vprint("adding scale...")
-    vprint("\t" + str(allScalesNames[i]))
-    vprint("\t" + str(allScales[i]))
+    vprint("\t" + str(ScaleNames[i]))
+    vprint("\t" + str(Scales[i]))
 
   notes = getNotes(allScales)
 
@@ -179,3 +216,16 @@ def gensong() :
 
 
 # ------------------------------------------------------------------------------
+# Main
+# ------------------------------------------------------------------------------
+
+
+allNotes = getAllNotes()
+
+#gensong()
+
+p = perceptron(pname=100)
+
+
+# ------------------------------------------------------------------------------
+

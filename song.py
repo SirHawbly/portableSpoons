@@ -14,25 +14,23 @@
 # ------------------------------------------------------------------------------
 
 
-import random
-# import notes
+from classfunctions import vprint
+import perceptron
+from midiutil.MidiFile import MIDIFile
+import copy
 
 
 # ------------------------------------------------------------------------------
-# Functions
+# Song Variables
 # ------------------------------------------------------------------------------
 
+
+CHANNELS = 10
 
 VERBOSE = True
 
-# defines the base printing function for this file,
-# if the VERBOSE variable is true, it will print things 
-# through out the file
-def vprint(string):
-  if VERBOSE :
-    print (string)
-
-
+# ------------------------------------------------------------------------------
+# Song Functions
 # ------------------------------------------------------------------------------
 
 
@@ -59,23 +57,89 @@ def makeNote (note, octave, length, volume, time) :
 def convertNotes(song) :
 
   time  = 0
-  ns    = []
+  notes    = []
 
   vprint("\nadding a octave, and duration to every note...")
-  for i in song :
 
+  for i in song :
       #               makeNote(note, octave, length, volume, time) 
       #                         note  octv  length                  vol  time
-      ns.append([notes.makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
+      notes.append([makeNote(i[0], i[1], int( 16 * i[2] / i[3]), 100, time)])
       time += int(16 * i[2] / i[3])
 
   # printing all notes in the song
-  for n in ns :
-    vprint(n)
+  for note in notes :
+    vprint(note)
 
   vprint("done with converting\n")
+  return notes
 
-  return ns
+
+# ------------------------------------------------------------------------------
+
+
+# given a note and octave, turn that into a midi pitch
+def MIDIpitch(note, octave) :
+
+  # midi middle C (C4)
+  pitch = 60
+
+  # get from C to A, (C -> B -> Bb -> A)
+  pitch = pitch - 3
+
+  # take off or add 12 to pitch per octave
+  pitch = pitch + (12 * octave)
+
+  # add on pitch per location in possible notes 
+  pitch = pitch + perceptron.getNoteIndex(note)
+
+  # print out the results
+  vprint(str(note) + ":" + str(octave) + " -> " + str(pitch))
+
+  return pitch
+
+
+# ------------------------------------------------------------------------------
+
+
+# given a string of notes, their intervals and their sequence,
+# output them to a midifile, of a given name.
+def writeToMidi(title, tempo, notes) :
+
+  # open up the media file.
+  mf = MIDIFile(CHANNELS, adjust_origin=1)
+
+  track    = 0
+  time     = 0.0
+  temptime = 0
+  channel  = 0
+  volume   = 100
+
+  # initialize the first track.
+  mf.addTrackName(track, time, title)
+  mf.addTempo(track, time, tempo * 12)
+
+  # notes should be a list of lists, with notes in the 
+  # sub lists occuring at the same time.
+  for chord in notes :
+    for sound in chord :
+
+      # save the time interval for the notes.  
+      # they should all be the same within the chord.
+
+      # vprint(sound)
+      # temptime = sound["time"]
+
+      # add the note to the midi track if its not a rest
+      if (sound['note'] != 'R') :
+        mf.addNote(track, channel, MIDIpitch(sound['note'], sound['octave']), \
+                sound['time'], sound['length'], sound['volume'])
+
+    # increase the time counter
+    # time += temptime
+
+  with open(title, 'wb') as outf:
+    mf.writeFile(outf)
 
 
 # ------------------------------------------------------------------------------
@@ -83,6 +147,44 @@ def convertNotes(song) :
 # ------------------------------------------------------------------------------
 
 
+if not (input('Verbose? ')) :
+    VERBOSE = False
+
+# testing these random note paths
+melody1 = [1,1,4,1]
+melody2 = [1,3,4,2,2,5,1,5]
+list1 = []
+
+l = list(perceptron.allScales.keys())
+
+# getting the G sharp Scale to put the path on
+GsMajor = perceptron.getScale(8, "maj")
+vprint(GsMajor)
+
+# play the melody on the scale provided
+for n in melody2 :
+  if (n == 8) :
+    octave = 1
+  else : 
+    octave = 0
+  list1.append([GsMajor[n - 1], octave, .5, 3])
+
+vprint("printing the notes in list1")
+vprint(list1)
+vprint("")
+
+# convert the list of notes to give them a duration and 
+# a octave and a note all in a list.
+testSong = convertNotes(list1)
+
+vprint("")
+vprint("writing notes to MIDI file")
+writeToMidi("melody2.mid", 60, testSong)
+vprint("")
+
+# print completion message
+vprint("done with midi.py")
+vprint("")
 
 
 
