@@ -17,6 +17,31 @@
 import random
 # import notes
 
+# ------------------------------------------------------------------------------
+# Classes
+# ------------------------------------------------------------------------------
+
+
+class perceptron:
+  size   = 0
+  record = {"input"  : {}, 
+            "output" : {}}
+
+  def getInput(inputset):
+    vprint(inputset)
+    if inputset in record["input"]:
+      testInput(inputset)
+      return record[]
+
+  def testInput(inputset):
+    vprint(inputset)
+
+  def checkRecord():
+    vprint("asdf")
+  
+  def getOutput():
+    vprint("asdf")
+
 
 # ------------------------------------------------------------------------------
 # Variables
@@ -181,6 +206,18 @@ def convertNotes(song) :
 
 # ------------------------------------------------------------------------------
 
+def getNotes(scales)
+
+  note = None
+
+  for scale in scales:
+    for note in scale:
+
+
+  return Note
+
+# ------------------------------------------------------------------------------
+
 
 def gensong() :
   notes = []
@@ -194,9 +231,11 @@ def gensong() :
     allScales += [getScale(key, scaletype), ]
     allScalesNames += [[allNotes[key], list(scales)[scaletype]] ,]
 
-    vprint("\nadding scale...")
+    vprint("adding scale...")
     vprint("\t" + str(allScalesNames[i]))
     vprint("\t" + str(allScales[i]))
+
+  notes = getNotes(allScales)
 
   return notes
 
