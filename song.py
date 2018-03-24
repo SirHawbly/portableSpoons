@@ -128,7 +128,7 @@ def getAllNotes():
 
 
 def getScale(root, scale):
-  vprint("getting " + 
+  vprint("\ngetting " + 
           str(allNotes[root]) + 
           " " + 
           str(list(scales)[scale]) + 
@@ -187,15 +187,16 @@ def gensong() :
   allScales = []
   allScalesNames = []
 
-  for i in range(1, 5) :
+  for i in range(0, 5) :
     key = random.randrange(len(allNotes))
     scaletype = random.randrange(len(scales))
     
     allScales += [getScale(key, scaletype), ]
     allScalesNames += [[allNotes[key], list(scales)[scaletype]] ,]
 
-  vprint(allScalesNames)
-  vprint(allScales)
+    vprint("\nadding scale...")
+    vprint("\t" + str(allScalesNames[i]))
+    vprint("\t" + str(allScales[i]))
 
   return notes
 
