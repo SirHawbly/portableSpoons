@@ -1,4 +1,18 @@
+"""
+  * Copyright (c) 2018 Christopher Bartlett
+  * [This program is licensed under the "GPL License"]
+  * Please see the file LICENSE in the source
+  * distribution of this software for license terms.
+"""
+
+
+# ------------------------------------------------------------------------------
+# Packages
+# ------------------------------------------------------------------------------
+
+
 import classfunctions
+
 
 # ------------------------------------------------------------------------------
 # Classes
@@ -9,6 +23,7 @@ class perceptron:
   # member variables
   name    = 0
   size    = 0
+  weight  = 1
   record  = {"input"  : {}, 
              "output" : {}}
   nodes   = [[], []] # nodes that point to [0] and point from here [1]
@@ -19,6 +34,7 @@ class perceptron:
     if self.VERBOSE:
       print("\tperceptron: " + str(string))
 
+  # constructor
   def __init__(self, pname=0, precord = None, psize = None, pnodes = [[], []]):
     if pname : self.name = pname
     if psize : self.size = psize

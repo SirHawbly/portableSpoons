@@ -1,3 +1,11 @@
+"""
+  * Copyright (c) 2017 Christopher Bartlett
+  * [This program is licensed under the "GPL License"]
+  * Please see the file LICENSE in the source
+  * distribution of this software for license terms.
+"""
+
+
 # ------------------------------------------------------------------------------
 # Packages
 # ------------------------------------------------------------------------------
@@ -74,26 +82,6 @@ def pconnectNodes (self, node):
 # General Functions
 # ------------------------------------------------------------------------------
 
-def getPerceptrons(max):
-
-  pnodelist = []
-
-  p = perceptron(pname=-1)
-
-  # create a list of nodes that can be used in 
-  # the neural network
-  vprint("creating pnodes... ")
-
-  for i in range(0,max):
-    pnodelist = [deepcopy(p), pnodelist]
-    pnodelist[0].name = i
-
-  #for node,i in zip(pnodelist, range(0, len(pnodelist))):
-    #node.name = i
-
-  vprint("done creating pnodes.")
-
-  return pnodelist
 
 # ------------------------------------------------------------------------------
 
@@ -107,5 +95,6 @@ def testConnect() :
   vprint("3 - " + str(pnodelist[3].nodes))
   vprint("4 - " + str(pnodelist[4].nodes))
   vprint("5 - " + str(pnodelist[5].nodes))
+
 
 # ------------------------------------------------------------------------------

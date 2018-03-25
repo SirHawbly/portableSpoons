@@ -15,9 +15,9 @@
 
 
 from classfunctions import vprint
-import perceptron
+import network
 from midiutil.MidiFile import MIDIFile
-import copy
+# from copy import deepcopy
 
 
 # ------------------------------------------------------------------------------
@@ -28,6 +28,7 @@ import copy
 CHANNELS = 10
 
 VERBOSE = True
+
 
 # ------------------------------------------------------------------------------
 # Song Functions
