@@ -15,9 +15,9 @@
 
 
 from classes import perceptron
-# import classes
 
 from random import randrange
+
 from copy import deepcopy
 
 
