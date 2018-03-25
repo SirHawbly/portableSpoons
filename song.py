@@ -14,9 +14,10 @@
 # ------------------------------------------------------------------------------
 
 
-from classfunctions import vprint
-
-import network
+from network import getNoteIndex
+from network import allScales
+from network import getScale
+from network import vprint
 
 from midiutil.MidiFile import MIDIFile
 
@@ -95,10 +96,10 @@ def MIDIpitch(note, octave) :
   pitch = pitch + (12 * octave)
 
   # add on pitch per location in possible notes 
-  pitch = pitch + perceptron.getNoteIndex(note)
+  pitch = pitch + getNoteIndex(note)
 
   # print out the results
-  vprint(str(note) + ":" + str(octave) + " -> " + str(pitch))
+  vprint(str(note) + ":\t" + str(octave) + " -> " + str(pitch))
 
   return pitch
 
@@ -136,8 +137,13 @@ def writeToMidi(title, tempo, notes) :
 
       # add the note to the midi track if its not a rest
       if (sound['note'] != 'R') :
-        mf.addNote(track, channel, MIDIpitch(sound['note'], sound['octave']), \
-                sound['time'], sound['length'], sound['volume'])
+        mf.addNote(track, 
+                   channel, 
+                   MIDIpitch(sound['note'], 
+                   sound['octave']), 
+                   sound['time'], 
+                   sound['length'], 
+                   sound['volume'])
 
     # increase the time counter
     # time += temptime
@@ -151,7 +157,7 @@ def writeToMidi(title, tempo, notes) :
 # ------------------------------------------------------------------------------
 
 
-if not (input('Verbose? ')) :
+if not (input('\nVerbose? ')) :
     VERBOSE = False
 
 # testing these random note paths
@@ -159,10 +165,10 @@ melody1 = [1,1,4,1]
 melody2 = [1,3,4,2,2,5,1,5]
 list1 = []
 
-l = list(perceptron.allScales.keys())
+l = list(allScales.keys())
 
 # getting the G sharp Scale to put the path on
-GsMajor = perceptron.getScale(8, "maj")
+GsMajor = getScale(8, "maj")
 vprint(GsMajor)
 
 # play the melody on the scale provided
@@ -173,23 +179,18 @@ for n in melody2 :
     octave = 0
   list1.append([GsMajor[n - 1], octave, .5, 3])
 
-vprint("printing the notes in list1")
+vprint("\nprinting the notes in list1")
 vprint(list1)
-vprint("")
 
 # convert the list of notes to give them a duration and 
 # a octave and a note all in a list.
 testSong = convertNotes(list1)
 
-vprint("")
 vprint("writing notes to MIDI file")
 writeToMidi("melody2.mid", 60, testSong)
-vprint("")
 
 # print completion message
 vprint("done with midi.py")
-vprint("")
-
 
 
 # ------------------------------------------------------------------------------

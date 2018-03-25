@@ -5,6 +5,8 @@
   * distribution of this software for license terms.
 """
 
+# This file stores all functions that are needed in side of the classes in 
+# classes.py.  This is the .c file to the .h of classes.py.
 
 # ------------------------------------------------------------------------------
 # Packages
@@ -44,14 +46,6 @@ def PtestInput(self, inputset):
 # ------------------------------------------------------------------------------
 
 
-def PtestInput(self, inputset):
-    pprint(inputset)
-    raise NotImplementedError
-
-
-# ------------------------------------------------------------------------------
-
-
 def PcheckRecord(self):
   pprint("checking record...")
   raise NotImplementedError
@@ -70,19 +64,20 @@ def PgetOutput(self):
 # ------------------------------------------------------------------------------
 
 
-def pconnectNodes (self, node):
+# connect node to self's input/weight, 
+# and the nodes output to self.
+def pconnectNodes (self, node, weight):
 
-  # add the new node to the selfs output
-  self.nodes[1] += [node.name]
-  # add the self to the nodes input
-  node.nodes[0] += [self.name]
+  # add the new node to the selfs input
+  self.nodes['input']  += [node.name]
+  self.nodes['weight'] += [weight]
+
+  # add the self to the nodes output
+  node.nodes['output'] += [self.name]
 
 
 # ------------------------------------------------------------------------------
 # General Functions
-# ------------------------------------------------------------------------------
-
-
 # ------------------------------------------------------------------------------
 
 

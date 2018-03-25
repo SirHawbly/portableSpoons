@@ -23,10 +23,19 @@ class perceptron:
   # member variables
   name    = 0
   size    = 0
+  
+  # weights for inputs
   weights = []
+
+  # records for in and outputs
   record  = {"input"  : {}, 
              "output" : {}}
-  nodes   = [[], []] # nodes that point to [0] and point from here [1]
+
+  # nodes that point to [0] and point from here [1]             
+  nodes   = {"input" : [], 
+             "output" : [],
+             "weights" : []}
+ 
   VERBOSE = True
 
   # print function
@@ -42,9 +51,13 @@ class perceptron:
     if pnodes : self.nodes = pnodes
     self.pprint("newNode '" + str(self.name) + "'")
 
+# ------------------------------------------------------------------------------
+
 # add functions that are in the class functions file
 perceptron.getInput = classfunctions.PgetInput
 perceptron.testInput = classfunctions.PtestInput
 perceptron.checkRecord = classfunctions.PcheckRecord
 perceptron.getOutput = classfunctions.PgetOutput
 perceptron.connectNodes = classfunctions.pconnectNodes
+
+# ------------------------------------------------------------------------------

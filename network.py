@@ -8,6 +8,7 @@
   * distribution of this software for license terms.
 """
 
+
 # ------------------------------------------------------------------------------
 # Packages
 # ------------------------------------------------------------------------------
@@ -140,7 +141,7 @@ def getNoteIndex(note):
 # output all the notes in that scale
 def getScale(rootIndex, scaleIndex):
 
-  vprint("getting " + str(allNotes[rootIndex]) +
+  vprint("\ngetting " + str(allNotes[rootIndex]) +
           " " + str(scaleIndex) + " scale")
 
   scale = [allNotes[rootIndex], ]
