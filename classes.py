@@ -23,7 +23,7 @@ class perceptron:
   # member variables
   name    = 0
   size    = 0
-  weight  = 1
+  weights = []
   record  = {"input"  : {}, 
              "output" : {}}
   nodes   = [[], []] # nodes that point to [0] and point from here [1]

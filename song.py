@@ -15,8 +15,11 @@
 
 
 from classfunctions import vprint
+
 import network
+
 from midiutil.MidiFile import MIDIFile
+
 # from copy import deepcopy
 
 
