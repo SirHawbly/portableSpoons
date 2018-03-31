@@ -230,6 +230,7 @@ def getPerceptrons(max):
 
 
 allNotes = getAllNotes()
+vprint("All Notes -> " + str(allNotes))
 pnodelist = getPerceptrons(MAXNODES)
 
 # classfunctions.testConnect()
